@@ -43,6 +43,10 @@
     <span class="countdown-number">00</span>
     <span class="countdown-label">minutes</span>
   </div>
+  <div class="countdown-item" id="seconds">
+    <span class="countdown-number">00</span>
+    <span class="countdown-label">seconds</span>
+  </div>
 </div>
 
 <script>
@@ -54,14 +58,8 @@ function updateCountdown() {
   const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
   const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
   document.getElementById("days").querySelector(".countdown-number").textContent = days.toString().padStart(2, '0');
   document.getElementById("hours").querySelector(".countdown-number").textContent = hours.toString().padStart(2, '0');
-  document.getElementById("minutes").querySelector(".countdown-number").textContent = minutes.toString().padStart(2, '0');
-}
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-</script>
-</body>
-</html>
+  document.getElementById("minutes").querySelector(".countdown-number").textContent = minutes.toString().
