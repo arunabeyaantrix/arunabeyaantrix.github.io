@@ -55,6 +55,11 @@ function updateCountdown() {
   const endTime = new Date("August 18, 2023 17:00:00").getTime();
   const timeRemaining = endTime - now;
 
+  if (timeRemaining <= 0) {
+    document.getElementById("countdown").innerHTML = "EXPIRED";
+    return;
+  }
+
   const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
   const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
@@ -62,4 +67,12 @@ function updateCountdown() {
 
   document.getElementById("days").querySelector(".countdown-number").textContent = days.toString().padStart(2, '0');
   document.getElementById("hours").querySelector(".countdown-number").textContent = hours.toString().padStart(2, '0');
-  document.getElementById("minutes").querySelector(".countdown-number").textContent = minutes.toString().
+  document.getElementById("minutes").querySelector(".countdown-number").textContent = minutes.toString().padStart(2, '0');
+  document.getElementById("seconds").querySelector(".countdown-number").textContent = seconds.toString().padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
