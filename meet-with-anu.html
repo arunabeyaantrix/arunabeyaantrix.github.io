@@ -27,6 +27,18 @@
         font-size: 0.8rem;
         text-transform: uppercase;
       }
+      .music-button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -55,6 +67,7 @@
           <span class="countdown-label">seconds</span>
         </div>
       </div>
+      <button class="music-button" id="musicButton">Onnu click cheyte!</button>
     </div>
     <script>
       function updateCountdown() {
@@ -100,12 +113,24 @@
 
       updateCountdown();
       setInterval(updateCountdown, 1000);
+
       document.addEventListener("DOMContentLoaded", function () {
         const audio = document.getElementById("bgMusic");
+        const musicButton = document.getElementById("musicButton");
 
         audio.addEventListener("ended", function () {
           this.currentTime = 0;
           this.play();
+        });
+
+        musicButton.addEventListener("click", function () {
+          if (audio.paused) {
+            audio.play();
+            musicButton.textContent = "Nirth nirth";
+          } else {
+            audio.pause();
+            musicButton.textContent = "Veendm play";
+          }
         });
       });
     </script>
