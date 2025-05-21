@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Access Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #333333;
+      margin-bottom: 20px;
+    }
+
+    #accessBtn {
+      padding: 12px 24px;
+      font-size: 16px;
+      color: #fff;
+      background: #4CAF50;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #accessBtn.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 50px;
+      height: 70px;
+      background: red;
+      border-radius: 50% 50% 50% 50%;
+      animation: floatUp 6s infinite ease-in-out;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #555;
+      transform: translateX(-50%);
+    }
+
+    .balloon:nth-child(1) { left: 10%; background: #ff6b6b; animation-delay: 0s; }
+    .balloon:nth-child(2) { left: 25%; background: #ffca3a; animation-delay: 2s; }
+    .balloon:nth-child(3) { left: 45%; background: #8ac926; animation-delay: 4s; }
+    .balloon:nth-child(4) { left: 65%; background: #1982c4; animation-delay: 1s; }
+    .balloon:nth-child(5) { left: 85%; background: #6a4c93; animation-delay: 3s; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-300px); opacity: 1; }
+      100% { transform: translateY(-600px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+   <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  
+  <div class="card">
+    <img id="image" src="meme1.png" alt="Image" width="100%" height="100%" />
+    <h1 id="message">തുറക്കത്തില്ലെടി പട്ടി... പോയിട്ട് നാളെ 8 മണിക്ക് വാ </h1>
+    <button id="accessBtn">തുറന്നോ </button>
+  </div>
+
+  <script>
+    const now = new Date();
+
+    const openTime = new Date(now);
+    openTime.setDate(now.getDate() + 1); // Tomorrow
+    openTime.setHours(6, 0, 0, 0);       // 9:00 AM
+
+
+  //   // For testing: today at 8:20
+  //  const openTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 20, 25, 0);
+
+    const message = document.getElementById("message");
+    const button = document.getElementById("accessBtn");
+
+    function checkAccess() {
+      const current = new Date();
+      if (current >= openTime) {
+        message.textContent = "You can open it now!";
+        button.classList.add("show");
+      }
+    }
+
+    checkAccess();
+    setInterval(checkAccess, 10000);
+  </script>
+</body>
+</html>
