@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      font-family: 'Courier New', monospace;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      backdrop-filter: blur(10px);
+      z-index: 1;
+      position: relative;
+    }
+
+    .message {
+      font-size: 22px;
+      min-height: 100px;
+      white-space: pre-wrap;
+      border-right: 2px solid #ff4081;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    #nextBtn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 64, 129, 0.3);
+      transition: background 0.3s ease;
+    }
+
+    #nextBtn:hover {
+      background: #e91e63;
+    }
+  </style>
+</head>
+<body>
+  <!-- 🧨 Add Canvas for Fireworks -->
+  <canvas id="fireworks"></canvas>
+
+  <div class="card">
+    <div id="messageBox" class="message"></div>
+    <br/>
+    <button id="nextBtn" style="display:none;">Click angottu!!</button>
+  </div>
+
+  <script>
+    const messages = [
+      "🎈 First of all Happy birthday\n Thank me for being in your life\n I'm amazing, and today is all about me.😂😂😂 Karayandatto Happy birthday. Yeyeyeyy\n Extra kurach samayam kitti atonda \n Alland I dont care about you \n Fuck you!!🎂",
+      "🌟 You have this way of walking into a room — or even a moment — and making it better, brighter, lighter. You’re not just kind. You’re intentional. Not just smart — you’re sharp, clumpsy, thoughtful, and weirdly good at reading people. And don’t get me started on that laugh — loud, unexpected, and kind of addictive. I’ve seen so many sides of you — calm, chaotic, caring, fire. And honestly? I admire all of them. So today, I just wanted to remind you of the person you are someone unforgettable. \n✨ Happy Birthday, A. The world feels better with you in it. 💖 \n -CHATGPT",
+      "I'll share some of my wisdom - You're capable but take time to think through. There is no problem in waiting when you are confused shut down and its ok. Work on the things you want You will have help from my side enn vicharikkanda Fuck you!!",
+      "Njan oru paatangottu paadiyalo... Alle venda Ni onnum ente kazhiv Arhikkunnilla I have something else prepared ath kanditt poya mati. Once again Fuck you!! Fuck your Birthday you pice of shit"
+    ];
+
+    let currentMessageIndex = 0;
+    let charIndex = 0;
+    const typingSpeed = 60;
+
+    const messageBox = document.getElementById('messageBox');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function typeMessage() {
+      const message = messages[currentMessageIndex];
+      if (charIndex < message.length) {
+        messageBox.textContent += message.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeMessage, typingSpeed);
+      } else {
+        nextBtn.style.display = 'inline-block';
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentMessageIndex++;
+      if (currentMessageIndex < messages.length) {
+        messageBox.textContent = '';
+        charIndex = 0;
+        nextBtn.style.display = 'none';
+        setTimeout(typeMessage, 500);
+      } else {
+        nextBtn.style.display = 'none';
+        messageBox.textContent += "\n🎊 With love from your friends 💕";
+      }
+    });
+
+    // Start typing first message
+    typeMessage();
+
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let fireworks = [];
+
+    class Firework {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height;
+        this.radius = Math.random() * 2 + 1;
+        this.color = `hsl(${Math.floor(Math.random() * 360)}, 100%, 60%)`;
+        this.velocityY = Math.random() * -10 - 10;
+        this.exploded = false;
+        this.particles = [];
+      }
+
+      update() {
+        if (!this.exploded) {
+          this.y += this.velocityY;
+          this.velocityY += 0.3;
+          if (this.velocityY >= 0) {
+            this.exploded = true;
+            for (let i = 0; i < 30; i++) {
+              this.particles.push(new Particle(this.x, this.y, this.color));
+            }
+          }
+        }
+      }
+
+      draw() {
+        if (!this.exploded) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        } else {
+          this.particles.forEach(p => {
+            p.update();
+            p.draw();
+          });
+        }
+      }
+    }
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.velocityX = Math.random() * 6 - 3;
+        this.velocityY = Math.random() * 6 - 3;
+        this.life = 60;
+        this.color = color;
+      }
+
+      update() {
+        this.x += this.velocityX;
+        this.y += this.velocityY;
+        this.life--;
+      }
+
+      draw() {
+        if (this.life > 0) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+        }
+      }
+    }
+
+    function animateFireworks() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      if (Math.random() < 0.05) {
+        fireworks.push(new Firework());
+      }
+
+      fireworks.forEach((f, index) => {
+        f.update();
+        f.draw();
+        if (f.exploded && f.particles.every(p => p.life <= 0)) {
+          fireworks.splice(index, 1);
+        }
+      });
+
+      requestAnimationFrame(animateFireworks);
+    }
+
+    animateFireworks();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
