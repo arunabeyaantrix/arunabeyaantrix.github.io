@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎉 🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎉 </title>
+  <title>Access Page</title>
   <style>
     * {
       box-sizing: border-box;
@@ -101,7 +101,7 @@
   <div class="balloon"></div>
   <div class="balloon"></div>
   <div class="balloon"></div>
-  
+
   <div class="card">
     <img id="image" src="meme1.png" alt="Image" width="100%" height="100%" />
     <h1 id="message">തുറക്കത്തില്ലെടി പട്ടി... പോയിട്ട് നാളെ 8 മണിക്ക് വാ </h1>
@@ -111,12 +111,8 @@
 
   <script>
     const now = new Date();
-
-   const openTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 25, 0);
-
-
   //   // For testing: today at 8:20
-  //  const openTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 20, 25, 0);
+   const openTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 25, 0);
 
     const message = document.getElementById("message");
     const button = document.getElementById("accessBtn");
@@ -124,7 +120,7 @@
     function checkAccess() {
       const current = new Date();
       if (current >= openTime) {
-        message.textContent = "You can open it now!";
+        message.textContent = "Power undel, You can open it now! Karayalle Arathy Karayalle";
         button.classList.add("show");
       }
     }
