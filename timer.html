@@ -111,9 +111,7 @@
   <script>
     const now = new Date();
 
-    const openTime = new Date(now);
-    openTime.setDate(now.getDate() + 1); // Tomorrow
-    openTime.setHours(6, 0, 0, 0);       // 9:00 AM
+   const openTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 25, 0);
 
 
   //   // For testing: today at 8:20
