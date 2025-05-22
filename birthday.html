@@ -37,7 +37,7 @@
       width: 90%;
       backdrop-filter: blur(10px);
       z-index: 1;
-      max-height: 300px;
+      max-height: 60vh;
       position: relative;
       overflow-y: auto;
     }
@@ -101,20 +101,21 @@
     const nextBtn = document.getElementById('nextBtn');
 
     function typeMessage() {
-      const message = messages[currentMessageIndex];
-      if (charIndex < message.length) {
-        messageBox.textContent += message.charAt(charIndex);
-        charIndex++;
+  const message = messages[currentMessageIndex];
+  if (charIndex < message.length) {
+    messageBox.innerText += message.charAt(charIndex);
+    charIndex++;
 
-        // Scroll to bottom as message is typed
-        const container = document.getElementById('messageContainer');
-        container.scrollTop = container.scrollHeight;
+    requestAnimationFrame(() => {
+      const container = document.getElementById('messageContainer');
+      container.scrollTop = container.scrollHeight;
+    });
 
-        setTimeout(typeMessage, typingSpeed);
-      } else {
-        nextBtn.style.display = 'inline-block';
-      }
-    }
+    setTimeout(typeMessage, typingSpeed);
+  } else {
+    nextBtn.style.display = 'inline-block';
+  }
+}
 
     nextBtn.addEventListener('click', () => {
       currentMessageIndex++;
