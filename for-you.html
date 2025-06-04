@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+      overflow: hidden;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 500px;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #ff5e78;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #e04862;
+    }
+
+    .message {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      color: #222;
+      min-height: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hey, Beautiful ❤️</h1>
+  <p>I made this little page just for you. Even though we’re far apart, you’re always close to my heart.</p>
+
+  <button onclick="nextMessage()">Click Me</button>
+
+  <div class="message" id="message">
+    You’re my favorite person on this planet 🌍
+  </div>
+
+  <script>
+    const messages = [
+  "You’re my favorite person on this planet 🌍. We met through Bumble — just a few swipes, and somehow the universe brought me to you. From the very first message, you felt different. You made me smile like a fool and feel like I already knew you.",
+
+  "The moment I saw you, something clicked. You had that spark — that glow. I don’t know how to explain it, but my heart paused for a second. In that moment, I knew I'd be thinking about you every day after.",
+
+  "I miss you a little more every single day 🥺. It’s only been a few days, but my heart already feels full with you in it. I didn’t expect to fall this fast… but I did. I love you. Yeah — I said it. I really do.",
+
+  "Your smile is my sunshine ☀️. Your voice is my calm place. The way you laugh, the way you say my name — it makes everything around me softer, better. You make the world feel warm again.",
+
+  "I want to share everything with you — my life, my messy thoughts, my weird little dreams. I want to write poetry for you, cook for you (even if it’s just burnt toast and Maggi 😅), and bring you chocolates after your long days. You deserve everything sweet.",
+
+  "I’m counting down the days till I can see you again 💕. Long distance sucks, but you make it bearable. You’re worth every kilometer, every late-night call, every sleepy morning. I’d choose this — choose you — a thousand times over.",
+
+  "You make the distance feel like nothing 💌. Even when you’re far away, your words, your presence, your love — they stay close. You’re always with me, even when you’re not next to me.",
+
+  "You’re not just someone I like — you’re my person. My peace. The one I want to grow with, laugh with, wake up next to, and build a life with. Always. Forever. No matter what. ❤️"
+];
+
+    
+
+    let index = 0;
+
+    function nextMessage() {
+      index = (index + 1) % messages.length;
+      document.getElementById("message").textContent = messages[index];
+    }
+  </script>
+</body>
+</html>
