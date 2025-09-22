@@ -77,19 +77,28 @@
 </head>
 <body>
   <div class="confetti" id="confetti"></div>
-  <audio id="bgMusic" autoplay loop>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
       <source src="./birthday.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
-    </audio>
+  </audio>
 
-  <div class="card active" id="page1">
+  <!-- Intro Page -->
+  <div class="card active" id="intro">
+    <h1>🎵 Hey Beautiful! Ready for a Birthday Surprise? 🎉</h1>
+    <button id="enterButton">Click me to enter your Birthday Magic 💖</button>
+  </div>
+
+  <!-- Birthday Pages -->
+  <div class="card" id="page1">
     <h1>🎉 Happy Birthday, My Cutie! 🎂</h1>
-    <p>I don't know where to start I promised you to write a poem for you but I still couldnt do it, Let me use this time to make it up to you and make this beautiful just a my beautiful girl deserve. We met through Bumble, and since then you’ve been one of the most special people in my life. 💕</p>
+    <p>I don't know where to start I promised you to write a poem for you but I still couldnt do it, Let me use this time to make it up to you and make this beautiful just as my beautiful girl deserves. We met through Bumble, and since then you’ve been one of the most special people in my life. 💕</p>
     <button onclick="nextPage(1)">Next ➡️</button>
   </div>
 
   <div class="card" id="page2">
-    <p>I know its not an ideal story for me to tell out kids "How I met your mother" but i'll always cherish that moment. I found you at my hardest you still made it one of the most beautiful days. Thanks for that 🥰</p>
+    <p>I know it's not an ideal story for me to tell our kids "How I met your mother" but I'll always cherish that moment. I found you at my hardest, yet you made it one of the most beautiful days. Thanks for that 🥰</p>
     <button onclick="nextPage(2)">Next ➡️</button>
   </div>
 
@@ -104,10 +113,9 @@
   </div>
 
   <div class="card" id="page5">
-    <p>I hope this year brings you endless happiness, love, and surprises as wonderful as you. 🌸 This is not the way I want to celebrate your birthday I want to be with you staying by your side seeing you making your Dreams come true💖 I hope I can do that in years to come</p>
-    <h2>🎂💖 Happy Birthday Once Again! and I LOVE YOU!!!!💖🎂</h2>
+    <p>I hope this year brings you endless happiness, love, and surprises as wonderful as you. 🌸 This is not the way I want to celebrate your birthday. I want to be with you, staying by your side, seeing you make your dreams come true 💖 I hope I can do that in years to come.</p>
+    <h2>🎂💖 Happy Birthday Once Again! And I LOVE YOU!!!! 💖🎂</h2>
   </div>
-  <button class="music-button" id="musicButton">Play Music</button>
 
   <script>
     // Confetti generator
@@ -122,7 +130,6 @@
       confettiContainer.appendChild(confetti);
     }
 
-
     // Page navigation
     function nextPage(page) {
       document.getElementById('page' + page).classList.remove('active');
@@ -131,25 +138,19 @@
         document.getElementById('page' + next).classList.add('active');
       }
     }
-   document.addEventListener("DOMContentLoaded", function () {
-        const audio = document.getElementById("bgMusic");
-        const musicButton = document.getElementById("musicButton");
 
-        audio.addEventListener("ended", function () {
-          this.currentTime = 0;
-          this.play();
-        });
+    // Intro Button to Enter App & Play Music
+    const enterButton = document.getElementById('enterButton');
+    const intro = document.getElementById('intro');
+    const page1 = document.getElementById('page1');
+    const bgMusic = document.getElementById('bgMusic');
 
-        musicButton.addEventListener("click", function () {
-          if (audio.paused) {
-            audio.play();
-            musicButton.textContent = "Pause Music";
-          } else {
-            audio.pause();
-            musicButton.textContent = "Play Music";
-          }
-        });
-      });
+    enterButton.addEventListener('click', () => {
+      intro.classList.remove('active');
+      page1.classList.add('active');
+      bgMusic.volume = 0.6;
+      bgMusic.play();
+    });
   </script>
 </body>
 </html>
