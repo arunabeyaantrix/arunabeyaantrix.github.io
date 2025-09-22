@@ -77,10 +77,10 @@
 </head>
 <body>
   <div class="confetti" id="confetti"></div>
-  <audio id="bg-music" autoplay loop>
-  <source src="test.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+  <audio id="bgMusic" autoplay loop>
+      <source src="./birthday.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
 
   <div class="card active" id="page1">
     <h1>🎉 Happy Birthday, My Cutie! 🎂</h1>
@@ -107,6 +107,7 @@
     <p>I hope this year brings you endless happiness, love, and surprises as wonderful as you. 🌸 This is not the way I want to celebrate your birthday I want to be with you staying by your side seeing you making your Dreams come true💖 I hope I can do that in years to come</p>
     <h2>🎂💖 Happy Birthday Once Again! and I LOVE YOU!!!!💖🎂</h2>
   </div>
+  <button class="music-button" id="musicButton">Play Music</button>
 
   <script>
     // Confetti generator
@@ -130,13 +131,25 @@
         document.getElementById('page' + next).classList.add('active');
       }
     }
-    const audio = document.getElementById("bg-music");
-  audio.volume = 0.6; // softer volume
+   document.addEventListener("DOMContentLoaded", function () {
+        const audio = document.getElementById("bgMusic");
+        const musicButton = document.getElementById("musicButton");
 
-  // When she clicks anywhere (like Next button), music starts
-  document.addEventListener("click", () => {
-    audio.play();
-  }, { once: true });
+        audio.addEventListener("ended", function () {
+          this.currentTime = 0;
+          this.play();
+        });
+
+        musicButton.addEventListener("click", function () {
+          if (audio.paused) {
+            audio.play();
+            musicButton.textContent = "Pause Music";
+          } else {
+            audio.pause();
+            musicButton.textContent = "Play Music";
+          }
+        });
+      });
   </script>
 </body>
 </html>
